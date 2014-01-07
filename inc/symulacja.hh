@@ -19,31 +19,12 @@
 #define SYMULACJA
 
 #include <QObject>
-#include <QTimer>
 #include <QMetaType>
 #include <iostream>
-#include <cmath>
 
-#define PI 3.141592
 
-using namespace std;
 
-/*! \struct Parameters symulacja.hh "inc/symulacja.hh"
- * \brief Structure used for exchanging data between solver and graphical
- * engine
- */
-struct Parameters{
 
-  /*! \brief q1 - joint1, q2 - joint2, q3 = dq1/dt, q4 = dq2/dt */
-  double q[4];
-  /*! \brief l1 - joint1 length, l2 - joint2 length */
-  double l[2];
-  /*! \brief m1 - joint1 mass, m2 - joint2 mass */
-  double m[2];
-
-};
-
-Q_DECLARE_METATYPE( Parameters )
 
 /*! \class ODESolver symulacja.hh "inc/symulacja.hh"
  *
@@ -92,6 +73,8 @@ public:
   int DimU();
   /*! \brief returns state vector */
   double* X();
+  /*! \brief returns controls */
+  double* U();
   /*! \brief ODE Function
    *
    * This function describes the ODE system. It should be of the form
@@ -128,28 +111,7 @@ public:
 
 };
 
-class Wahadlo: public QObject, public ODESolver{
-Q_OBJECT
-  QTimer *Timer;
-  Parameters param;
 
-public:
-
-  Wahadlo( QObject *wRodzic = 0 );
-  ~Wahadlo();
-  void  ODEFun(double *x, double *u, double *xp);
-
-public slots:
-
-  void DoTheStep();
-  void ApplyForce();
-  void ReleaseForce();
-
-signals:
-
-  void UpdateAngles( Parameters p );
-
-};
 
 
 

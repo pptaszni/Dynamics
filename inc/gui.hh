@@ -4,44 +4,28 @@
 
 #include <QApplication>
 #include <QWidget>
-#include <QPainter>
 #include <QMainWindow>
 #include <QPushButton>
-#include <QBrush>
-#include <QPalette>
-#include <QLineEdit>
-#include <QString>
-#include <QLineF>
-#include <iostream>
-#include "symulacja.hh"
-
-
-
-class Wizualizacja: public QWidget {
-Q_OBJECT
-  Parameters param;
-
-public:
-
-  Wizualizacja( QWidget *wRodzic = 0 );
-  void paintEvent( QPaintEvent *event );
-
-public slots:
-
-  void fresh( Parameters p );
-
-};
+#include "WizualizacjaWahadla.hh"
+#include "VehicleVisualization.hh"
 
 
 class OknoGlowne: public QMainWindow{
+Q_OBJECT
 
-  Wizualizacja *W;
-  Wahadlo *S;
-  QPushButton *B;
+  WizualizacjaWahadla *W;
+  VehicleVisualization *V;
+  QPushButton *Op1;
+  QPushButton *Op2;
 
 public:
 
   OknoGlowne( QWidget *wRodzic = 0 );
+
+public slots:
+
+  void InitWahadlo();
+  void InitVehicle();
 
 };
 
